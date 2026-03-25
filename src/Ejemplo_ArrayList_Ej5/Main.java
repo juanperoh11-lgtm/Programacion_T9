@@ -1,6 +1,7 @@
 package Ejemplo_ArrayList_Ej5;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Main {
@@ -36,6 +37,9 @@ public class Main {
 		while (iterator.hasNext()) {
 			System.out.println(iterator.next());
 		}
+		
+		//Ordenar 
+		Collections.sort(numeros);
 	}
 
 }

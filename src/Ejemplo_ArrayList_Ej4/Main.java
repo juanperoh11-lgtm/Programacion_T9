@@ -1,6 +1,7 @@
 package Ejemplo_ArrayList_Ej4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -34,6 +35,9 @@ public class Main {
 		
 		for(Persona p:personas)
 			System.out.println(p);
+		
+		//Pare ordenar
+		Collections.sort(null);
 	}
 
 }

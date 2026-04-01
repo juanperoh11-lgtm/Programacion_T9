@@ -17,8 +17,11 @@ public class Main {
 			double h = sc.nextDouble();
 			if (h == 0)
 				break;
-			alturas.add(h);
-			suma += h;
+			// En primer lugar, esto esta fuera del if
+			// El alturas... esto mete la altura seleccionada y suma+ = h es para que se almacenando la altura
+			alturas.add(h);             
+		    suma += h;
+		    
 		}
 
 		if (alturas.isEmpty()) {

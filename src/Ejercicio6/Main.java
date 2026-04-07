@@ -14,8 +14,8 @@ public class Main {
 				Secuencia.add(i);
 			}
 		}
-
-		System.out.println("Secuencia generada: " + Secuencia);
+		// En principio pone lo mismo que en el toString
+		System.out.println( Secuencia);
 
 	}
 

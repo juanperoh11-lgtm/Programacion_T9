@@ -17,7 +17,7 @@ public class Main {
         boolean acceso = false;
         
         System.out.println("Control de acceso");
-        while(intentos <3) {
+        while(intentos >0) {
         	System.out.println("Introduce un usuario");
         	String login = sc.nextLine();
         	System.out.println("Introduce una contraseña");

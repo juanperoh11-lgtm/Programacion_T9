@@ -88,8 +88,6 @@ public class Main {
                     System.out.println("Saliendo del programa...");
                     break;
                 
-                default:
-                    System.out.println("Opción no válida.");
             }
         } while (opcion != 'f');
 

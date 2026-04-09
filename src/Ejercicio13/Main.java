@@ -42,7 +42,6 @@ public class Main {
 		int fallos = 0;
 
 		System.out.println("Traduce las siguientes palabras");
-		// 4. Bucle de juego (5 iteraciones)
         for(int i = 0; i < 5; i++) {
             // Obtenemos la palabra en español de la lista desordenada
         	String palabraPreguntada = palabrasEspañol.get(i);
@@ -55,7 +54,6 @@ public class Main {
             // Buscamos el valor asociado a la clave en el diccionario usando .get()
             String respuestaCorrecta = diccionario.get(palabraPreguntada);
             
-            // 5. Verificación de la respuesta
             // Usamos .equals() para comparar el contenido de las cadenas de texto
             if(respuestaUsuario.equals(respuestaCorrecta)) {
             	System.out.println("Correcto");
@@ -66,12 +64,10 @@ public class Main {
             }
         }
         
-        // 6. Impresión de estadísticas finales
         System.out.println("\nRESULTADOS FINAL");
         System.out.println("Aciertos: " + aciertos);
         System.out.println("Fallos: " + fallos);
         
-        // Cerramos el scanner por buena práctica
         sc.close();
 	}
 }

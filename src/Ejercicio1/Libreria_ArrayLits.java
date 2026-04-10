@@ -35,7 +35,8 @@ public class Libreria_ArrayLits {
 
     // Apartado d)
     public static double mediaArrayListInt(ArrayList<Integer> lista) {
-        if (lista.isEmpty()) return 0;
+        if (lista.isEmpty()) 
+        	return 0;
         double suma = 0;
         for (int a : lista) {
             suma += a; 

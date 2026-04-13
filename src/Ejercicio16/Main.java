@@ -12,6 +12,9 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int opcion;
 
+		plantilla.put(6, new Jugador("Guti", "Central"));
+		plantilla.put(10, new Jugador("Crintiano rolando", "Delantero"));
+
 		do {
 			System.out.println("\n--- Gestión de Plantilla ---");
 			System.out.println("1. Añadir jugador");
@@ -36,8 +39,13 @@ public class Main {
 					String nombre = sc.nextLine();
 					System.out.print("Posición: ");
 					String pos = sc.nextLine();
-					plantilla.put(dorsal, new Jugador(nombre, pos));
-					System.out.println("Jugador añadido con éxito.");
+					// Comprobación de la posicón
+					if (esCorrecta(pos)) {
+						plantilla.put(dorsal, new Jugador(nombre, pos));
+						System.out.println("Jugador añadido con éxito.");
+					} else {
+						System.out.println("Posición elegido incorrecta");
+					}
 				}
 				break;
 
@@ -50,15 +58,7 @@ public class Main {
 				break;
 
 			case 3:
-				System.out.println("--- Lista de Jugadores ---");
-				if (plantilla.isEmpty()) {
-					System.out.println("No hay jugadores.");
-				} else {
-					// Recorrer el hashMap
-					for (Entry<Integer, Jugador> entrada : plantilla.entrySet()) {
-						System.out.println("Dorsal: " + entrada.getKey() + " -> " + entrada.getValue());
-					}
-				}
+				mostrarTodos(plantilla);
 				break;
 
 			case 4:
@@ -83,8 +83,8 @@ public class Main {
 				}
 				break;
 
-			case 6:  
-				System.out.print("Dorsal del jugador a cambiar de posición: ");
+			case 6:
+				System.out.print("Dorsal del jugador que va a cambiar de posición: ");
 				int dPos = sc.nextInt();
 				sc.nextLine();
 				if (plantilla.containsKey(dPos)) {
@@ -102,6 +102,25 @@ public class Main {
 			}
 		} while (opcion != 7);
 		sc.close();
+	}
+
+	private static boolean esCorrecta(String pos) {
+		return pos.equals("Delantero") || (pos.equals("Defensa"))
+				|| (pos.endsWith("Porteto") || (pos.equals("Medio_Centro")));
+
+	}
+
+	private static void mostrarTodos(HashMap<Integer, Jugador> plantilla) {
+		System.out.println("--- Lista de Jugadores ---");
+		if (plantilla.isEmpty()) {
+			System.out.println("No hay jugadores.");
+		} else {
+			// Recorrer el hashMap
+			for (Entry<Integer, Jugador> entrada : plantilla.entrySet()) {
+				System.out.println("Dorsal: " + entrada.getKey() + " -> " + entrada.getValue());
+			}
+		}
+
 	}
 
 }

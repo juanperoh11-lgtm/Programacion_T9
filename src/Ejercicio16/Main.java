@@ -1,6 +1,9 @@
 package Ejercicio16;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -12,8 +15,9 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int opcion;
 
-		plantilla.put(6, new Jugador("Guti", "Central"));
-		plantilla.put(10, new Jugador("Crintiano rolando", "Delantero"));
+		plantilla.put(6, new Jugador("Guti", "Medio_Centro"));
+		plantilla.put(10, new Jugador("Cristiano Ronaldo", "Delantero"));
+		plantilla.put(9, new Jugador("Lionel Messi", "Delantero"));
 
 		do {
 			System.out.println("\n--- Gestión de Plantilla ---");
@@ -24,7 +28,9 @@ public class Main {
 			System.out.println("5. Modificar nombre");
 			System.out.println("6. Modificar posición");
 			System.out.println("7. Salir");
+			System.out.print("Seleccione una opción: ");
 			opcion = sc.nextInt();
+			sc.nextLine();
 
 			switch (opcion) {
 			case 1:
@@ -37,28 +43,28 @@ public class Main {
 				} else {
 					System.out.print("Nombre: ");
 					String nombre = sc.nextLine();
-					System.out.print("Posición: ");
+					System.out.print("Posición (Delantero, Defensa, Portero, Medio_Centro): ");
 					String pos = sc.nextLine();
-					// Comprobación de la posicón
 					if (esCorrecta(pos)) {
 						plantilla.put(dorsal, new Jugador(nombre, pos));
 						System.out.println("Jugador añadido con éxito.");
 					} else {
-						System.out.println("Posición elegido incorrecta");
+						System.out.println("Posición incorrecta.");
 					}
 				}
 				break;
 
 			case 2:
 				System.out.print("Dorsal a eliminar: ");
-				if (plantilla.remove(sc.nextInt()) != null)
+				int dEliminar = sc.nextInt();
+				if (plantilla.remove(dEliminar) != null)
 					System.out.println("Jugador eliminado.");
 				else
 					System.out.println("No se encontró el jugador.");
 				break;
-
+				
 			case 3:
-				mostrarTodos(plantilla);
+					mostrarTodosOrdenados(plantilla);
 				break;
 
 			case 4:
@@ -73,7 +79,7 @@ public class Main {
 			case 5:
 				System.out.print("Dorsal del jugador a renombrar: ");
 				int dNombre = sc.nextInt();
-				sc.nextLine();
+				sc.nextLine(); // Limpiar buffer
 				if (plantilla.containsKey(dNombre)) {
 					System.out.print("Nuevo nombre: ");
 					plantilla.get(dNombre).setNombre(sc.nextLine());
@@ -84,13 +90,18 @@ public class Main {
 				break;
 
 			case 6:
-				System.out.print("Dorsal del jugador que va a cambiar de posición: ");
+				System.out.print("Dorsal para cambiar posición: ");
 				int dPos = sc.nextInt();
-				sc.nextLine();
+				sc.nextLine(); // Limpiar buffer
 				if (plantilla.containsKey(dPos)) {
 					System.out.print("Nueva posición: ");
-					plantilla.get(dPos).setPosicion(sc.nextLine());
-					System.out.println("Posición actualizada.");
+					String nuevaPos = sc.nextLine();
+					if (esCorrecta(nuevaPos)) {
+						plantilla.get(dPos).setPosicion(nuevaPos);
+						System.out.println("Posición actualizada.");
+					} else {
+						System.out.println("Posición no válida.");
+					}
 				} else {
 					System.out.println("Jugador no encontrado.");
 				}
@@ -105,22 +116,27 @@ public class Main {
 	}
 
 	private static boolean esCorrecta(String pos) {
-		return pos.equals("Delantero") || (pos.equals("Defensa"))
-				|| (pos.endsWith("Porteto") || (pos.equals("Medio_Centro")));
-
+		// Corregido "Porteto" y simplificado
+		return pos.equals("Delantero") || pos.equals("Defensa") || pos.equals("Portero") || pos.equals("Medio_Centro");
 	}
 
-	private static void mostrarTodos(HashMap<Integer, Jugador> plantilla) {
+	private static void mostrarTodosOrdenados(HashMap<Integer, Jugador> plantilla) {
+		List<Integer> alNumeros = new ArrayList<Integer>(plantilla.keySet());
+		Collections.sort(alNumeros);
+		for(Integer num: alNumeros) {
+			System.err.println("Jugador número " + num + " " + plantilla.get(num));
+		}
+		
+		///Mostrar todos
+		/*
 		System.out.println("--- Lista de Jugadores ---");
 		if (plantilla.isEmpty()) {
 			System.out.println("No hay jugadores.");
 		} else {
-			// Recorrer el hashMap
 			for (Entry<Integer, Jugador> entrada : plantilla.entrySet()) {
 				System.out.println("Dorsal: " + entrada.getKey() + " -> " + entrada.getValue());
 			}
 		}
-
+		*/
 	}
-
 }
